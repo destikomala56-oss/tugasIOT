@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AirGuard | IoT Pemantau Kualitas Udara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header" data-header>
+    <nav class="nav">
+      <a class="brand" href="#home" aria-label="AirGuard beranda">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" role="img">
+            <path class="logo-shield" d="M32 6 52 15v16c0 13.5-8 22.8-20 27-12-4.2-20-13.5-20-27V15L32 6Z"/>
+            <path class="logo-air" d="M20 28c8-7 16-7 24 0M22 37c6-5 14-5 20 0"/>
+            <circle class="logo-dot" cx="32" cy="27" r="4"/>
+            <circle class="logo-dot" cx="25" cy="43" r="2.2"/>
+            <circle class="logo-dot" cx="39" cy="43" r="2.2"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <strong>AirGuard</strong>
+          <small>Air Intelligence</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Buka menu" aria-controls="navLinks" aria-expanded="false" data-menu-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-links" id="navLinks" aria-label="Navigasi utama" data-nav-links>
+        <a href="#fitur">Fitur</a>
+        <a href="#aplikasi">Aplikasi</a>
+        <a href="#etalase">Etalase</a>
+        <a href="#admin">Admin</a>
+        <a href="#kontak">Kontak</a>
+      </div>
+
+      <button class="nav-cta cart-trigger" type="button" data-open-cart>
+        Keranjang
+        <span class="cart-count" data-cart-count>0</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content reveal">
+        <p class="eyebrow">IoT air quality monitoring</p>
+        <h1>Command center untuk udara yang kamu hirup setiap hari.</h1>
+        <p class="hero-copy">
+          AirGuard membaca kualitas udara di lingkunganmu secara real-time, mengubah data sensor menjadi insight yang jelas, lalu mengirimkan semuanya ke beranda aplikasi.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#etalase">Lihat Etalase</a>
+          <a class="btn btn-secondary" href="#aplikasi">Lihat Dashboard</a>
+        </div>
+
+        <div class="signal-strip" aria-label="Status pemantauan AirGuard">
+          <span>Live AQI</span>
+          <b data-count="38">0</b>
+          <span>PM2.5</span>
+          <b data-count="12">0</b>
+          <span>CO2 ppm</span>
+          <b data-count="482">0</b>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal">
+        <div class="air-grid" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <img src="assets/airguard-hero.png" alt="Perangkat AirGuard dan tampilan dashboard aplikasi kualitas udara">
+        <div class="status-card status-card-top">
+          <span class="pulse"></span>
+          <div>
+            <strong>Udara Stabil</strong>
+            <p><span id="heroAqi">38</span> AQI - Baik</p>
+          </div>
+        </div>
+        <div class="status-card status-card-bottom">
+          <strong>Respon Sensor</strong>
+          <p>3 detik refresh</p>
+          <div class="mini-bars" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section problem">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Kenapa AirGuard</p>
+        <h2>Karena udara buruk jarang mengetuk pintu dulu.</h2>
+      </div>
+      <div class="problem-grid">
+        <article class="reveal">
+          <span>01</span>
+          <h3>Polusi tidak selalu terlihat</h3>
+          <p>Debu halus, asap, dan gas berlebih bisa meningkat tanpa tanda visual yang jelas.</p>
+        </article>
+        <article class="reveal">
+          <span>02</span>
+          <h3>Data manual terlalu lambat</h3>
+          <p>Sensor AirGuard mengirim pembacaan otomatis agar kondisi udara terus terpantau.</p>
+        </article>
+        <article class="reveal">
+          <span>03</span>
+          <h3>Keputusan butuh konteks</h3>
+          <p>Aplikasi memberi status, tren, dan rekomendasi ringkas saat kualitas udara berubah.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section features" id="fitur">
+      <div class="section-heading wide reveal">
+        <p class="eyebrow">Fitur unggulan</p>
+        <h2>Satu node kecil, banyak lapisan proteksi.</h2>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card reveal">
+          <div class="icon">PM</div>
+          <h3>Partikel halus</h3>
+          <p>Membaca indikasi PM2.5 dan PM10 untuk memahami debu serta partikel kecil di udara.</p>
+        </article>
+        <article class="feature-card reveal">
+          <div class="icon">CO2</div>
+          <h3>Gas dan CO2</h3>
+          <p>Mendeteksi perubahan kadar gas sehingga ruangan tidak terasa aman hanya dari perkiraan.</p>
+        </article>
+        <article class="feature-card reveal">
+          <div class="icon">RH</div>
+          <h3>Suhu dan kelembapan</h3>
+          <p>Mengukur kenyamanan ruangan untuk rumah, kelas, kantor kecil, atau studio.</p>
+        </article>
+        <article class="feature-card reveal">
+          <div class="icon">IoT</div>
+          <h3>Cloud dashboard</h3>
+          <p>Data dikirim ke aplikasi sehingga status udara bisa dilihat dari mana saja.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="app-preview" id="aplikasi">
+      <div class="app-copy reveal">
+        <p class="eyebrow">Dashboard aplikasi</p>
+        <h2>Beranda aplikasi yang terasa seperti ruang kontrol pribadi.</h2>
+        <p>
+          Pilih skenario ruangan, lihat kualitas udara saat ini, dan dapatkan rekomendasi tindakan tanpa harus membaca tabel sensor yang rumit.
+        </p>
+
+        <div class="scenario-tabs" role="tablist" aria-label="Skenario ruangan">
+          <button class="active" type="button" data-scene="home">Rumah</button>
+          <button type="button" data-scene="class">Kelas</button>
+          <button type="button" data-scene="office">Kantor</button>
+        </div>
+
+        <div class="scene-panel" aria-live="polite">
+          <strong id="sceneTitle">Ruang keluarga dalam mode aman</strong>
+          <p id="sceneCopy">Ventilasi masih cukup, partikel halus rendah, dan CO2 berada di zona nyaman.</p>
+        </div>
+      </div>
+
+      <div class="phone-ui reveal" aria-label="Mockup dashboard aplikasi AirGuard">
+        <div class="phone-top"></div>
+        <div class="phone-content">
+          <div class="app-title">
+            <span>AirGuard Home</span>
+            <strong id="appStatus">Baik</strong>
+          </div>
+          <div class="aqi-circle" id="aqiCircle">
+            <span id="aqiValue">38</span>
+            <small>AQI</small>
+          </div>
+          <div class="insight-card">
+            <span>Rekomendasi</span>
+            <strong id="appInsight">Udara aman. Pertahankan sirkulasi.</strong>
+          </div>
+          <div class="sensor-list">
+            <div><span>PM2.5</span><strong><span id="pmValue">12</span> ug/m3</strong></div>
+            <div><span>CO2</span><strong><span id="co2Value">482</span> ppm</strong></div>
+            <div><span>Suhu</span><strong><span id="tempValue">27</span> C</strong></div>
+            <div><span>Kelembapan</span><strong><span id="humidityValue">61</span>%</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section steps">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Cara kerja</p>
+        <h2>Pasang, hubungkan, biarkan AirGuard berjaga.</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="reveal">
+          <span>1</span>
+          <h3>Letakkan perangkat</h3>
+          <p>Tempatkan AirGuard di area yang ingin dipantau seperti kamar, kelas, atau ruang kerja.</p>
+        </div>
+        <div class="reveal">
+          <span>2</span>
+          <h3>Sambungkan Wi-Fi</h3>
+          <p>Hubungkan ke jaringan agar data sensor bisa dikirim otomatis ke aplikasi.</p>
+        </div>
+        <div class="reveal">
+          <span>3</span>
+          <h3>Baca laporannya</h3>
+          <p>Pantau status udara, tren sensor, dan rekomendasi dari beranda aplikasi.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="showcase" id="etalase">
+      <div class="showcase-head reveal">
+        <div>
+          <p class="eyebrow">Etalase AirGuard</p>
+          <h2>Pilih model yang paling cocok untuk ruangmu.</h2>
+        </div>
+        <button class="btn btn-secondary" type="button" data-open-cart>
+          Lihat Keranjang
+          <span class="cart-count" data-cart-count>0</span>
+        </button>
+      </div>
+
+      <div class="showcase-grid" id="productGrid" aria-live="polite"></div>
+    </section>
+
+    <section class="admin-lab" id="admin">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Admin Studio</p>
+        <h2>Tambahkan model AirGuard baru langsung ke etalase.</h2>
+        <p class="admin-copy">Masuk sebagai admin untuk mengelola etalase. Panel ini adalah prototipe front-end dan produk tambahan tersimpan di browser melalui localStorage.</p>
+      </div>
+
+      <form class="admin-login reveal" id="adminLoginForm">
+        <div class="admin-login-copy">
+          <span>Admin Gate</span>
+          <strong>Login diperlukan</strong>
+        </div>
+        <label>
+          Username
+          <input type="text" name="username" autocomplete="username" placeholder="admin" required>
+        </label>
+        <label>
+          Sandi
+          <input type="password" name="password" autocomplete="current-password" placeholder="admin123" required>
+        </label>
+        <button class="btn btn-primary" type="submit">Masuk Admin</button>
+        <p class="admin-login-message" id="adminLoginMessage" aria-live="polite"></p>
+      </form>
+
+      <div class="admin-locked reveal" id="adminLocked">
+        <strong>Admin Studio terkunci.</strong>
+        <p>Masukkan username dan sandi admin untuk membuka product builder dan inventory matrix.</p>
+      </div>
+
+      <div class="admin-session" id="adminSession" hidden>
+        <span>Mode admin aktif</span>
+        <button class="btn btn-secondary" type="button" id="adminLogoutButton">Keluar Admin</button>
+      </div>
+
+      <div class="admin-board reveal" id="adminBoard" hidden>
+        <form class="admin-form" id="adminProductForm">
+          <div class="admin-form-head">
+            <span>Product Builder</span>
+            <strong id="adminStatus">Siap input</strong>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              Nama model
+              <input type="text" name="name" placeholder="AirGuard Max" required>
+            </label>
+            <label>
+              Label
+              <input type="text" name="badge" placeholder="New Release" required>
+            </label>
+            <label>
+              Harga
+              <input type="number" name="price" min="10000" step="1000" placeholder="1899000" required>
+            </label>
+            <label>
+              Stok
+              <input type="number" name="stock" min="1" max="99" value="8" required>
+            </label>
+          </div>
+
+          <label>
+            Deskripsi singkat
+            <textarea name="description" rows="3" placeholder="Untuk pemantauan udara ruang produksi kecil." required></textarea>
+          </label>
+
+          <div class="form-grid">
+            <label>
+              Sensor utama
+              <input type="text" name="specs" placeholder="PM2.5, VOC, CO2" required>
+            </label>
+            <label>
+              Karakter visual
+              <select name="tone" required>
+                <option value="max">Max - teal elektrik</option>
+                <option value="lab">Lab - biru analitik</option>
+                <option value="solar">Solar - amber hangat</option>
+                <option value="field">Field - hijau outdoor</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="admin-actions">
+            <button class="btn btn-primary" type="submit">Tambah ke Etalase</button>
+            <button class="btn btn-secondary" type="button" data-reset-products>Reset Katalog</button>
+          </div>
+        </form>
+
+        <div class="admin-preview">
+          <div class="admin-preview-head">
+            <span>Inventory Matrix</span>
+            <strong id="inventoryCount">0 model</strong>
+          </div>
+          <div class="inventory-list" id="inventoryList" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section testimonials">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Dipakai untuk ruang sehari-hari</p>
+        <h2>Lebih tenang karena kualitas udara tidak lagi ditebak.</h2>
+      </div>
+      <div class="testimonial-grid">
+        <article class="reveal">
+          <p>"Mudah dipasang dan laporan aplikasinya jelas. Saya jadi tahu kapan ventilasi perlu dibuka."</p>
+          <strong>Raka</strong>
+          <span>Pemilik rumah</span>
+        </article>
+        <article class="reveal">
+          <p>"Dashboardnya membantu memantau kelas setelah jam ramai. Datanya ringkas dan cepat terbaca."</p>
+          <strong>Nadia</strong>
+          <span>Pengelola ruang belajar</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="final-cta reveal" id="kontak">
+      <p class="eyebrow">AirGuard</p>
+      <h2>Jadikan udara di sekitarmu lebih terukur.</h2>
+      <p>Bangun kebiasaan hidup sehat dengan data kualitas udara yang selalu hadir di genggaman.</p>
+      <button class="btn btn-primary" type="button" data-open-cart>Buka Keranjang</button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 AirGuard. IoT pemantau kualitas udara.</p>
+    <div>
+      <a href="#fitur">Fitur</a>
+      <a href="#etalase">Etalase</a>
+      <button type="button" data-open-cart>Keranjang</button>
+    </div>
+  </footer>
+
+  <div class="cart-overlay" id="cartOverlay" hidden>
+    <aside class="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+      <button class="close-order" type="button" aria-label="Tutup keranjang" data-close-cart></button>
+      <div class="order-head">
+        <p class="eyebrow">Keranjang Belanja</p>
+        <h2 id="cartTitle">Review produk sebelum checkout.</h2>
+        <p>Pilih model AirGuard dari etalase, atur jumlahnya di sini, lalu lanjutkan ke checkout ketika pesanan sudah benar.</p>
+      </div>
+
+      <div class="cart-items" id="cartItems" aria-live="polite"></div>
+
+      <div class="cart-empty" id="cartEmpty">
+        <strong>Keranjang masih kosong.</strong>
+        <p>Tambahkan model AirGuard dari etalase terlebih dahulu.</p>
+        <a class="btn btn-secondary full" href="#etalase" data-close-cart>Lihat Etalase</a>
+      </div>
+
+      <div class="cart-summary">
+        <div>
+          <span>Total item</span>
+          <strong id="cartItemCount">0</strong>
+        </div>
+        <div>
+          <span>Total belanja</span>
+          <strong id="cartTotal">Rp0</strong>
+        </div>
+      </div>
+
+      <button class="btn btn-primary full" type="button" id="checkoutButton" disabled>Lanjut Checkout</button>
+    </aside>
+  </div>
+
+  <div class="order-overlay" id="orderOverlay" hidden>
+    <aside class="order-panel" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
+      <button class="close-order" type="button" aria-label="Tutup form pemesanan" data-close-order></button>
+      <div class="order-head">
+        <p class="eyebrow">Checkout AirGuard</p>
+        <h2 id="orderTitle">Isi data diri untuk menyelesaikan pesanan.</h2>
+        <p>Checkout memakai isi keranjangmu. Data tidak dikirim ke server karena website ini masih statis.</p>
+      </div>
+
+      <form class="order-form" id="orderForm" novalidate>
+        <div class="form-grid">
+          <label>
+            Nama lengkap
+            <input type="text" name="name" autocomplete="name" placeholder="Contoh: Ardia Pratama" required>
+          </label>
+          <label>
+            Nomor WhatsApp
+            <input type="tel" name="phone" autocomplete="tel" placeholder="08xxxxxxxxxx" required>
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" autocomplete="email" placeholder="nama@email.com" required>
+          </label>
+          <label>
+            Kota
+            <input type="text" name="city" autocomplete="address-level2" placeholder="Contoh: Semarang" required>
+          </label>
+        </div>
+
+        <label>
+          Alamat pengiriman
+          <textarea name="address" rows="3" autocomplete="street-address" placeholder="Nama jalan, nomor rumah, kecamatan" required></textarea>
+        </label>
+
+        <div class="checkout-cart">
+          <div>
+            <span>Isi keranjang</span>
+            <strong id="checkoutItemCount">0 item</strong>
+          </div>
+          <div id="checkoutCartList" class="checkout-cart-list"></div>
+        </div>
+
+        <fieldset class="payment-methods">
+          <legend>Pilih metode pembayaran</legend>
+          <label>
+            <input type="radio" name="payment" value="Transfer Bank" required>
+            <span>
+              <strong>Transfer Bank</strong>
+              <small>BCA, Mandiri, BNI</small>
+            </span>
+          </label>
+          <label>
+            <input type="radio" name="payment" value="QRIS">
+            <span>
+              <strong>QRIS</strong>
+              <small>Scan dari semua e-wallet</small>
+            </span>
+          </label>
+          <label>
+            <input type="radio" name="payment" value="E-Wallet">
+            <span>
+              <strong>E-Wallet</strong>
+              <small>GoPay, OVO, DANA</small>
+            </span>
+          </label>
+          <label>
+            <input type="radio" name="payment" value="COD">
+            <span class="cod-payment">
+              <strong>COD</strong>
+              <small>Bayar di tempat saat paket tiba</small>
+            </span>
+          </label>
+        </fieldset>
+
+        <div class="order-summary" aria-live="polite">
+          <div>
+            <span>Item</span>
+            <strong id="summaryPackage">Belum ada item</strong>
+          </div>
+          <div>
+            <span>Subtotal</span>
+            <strong id="summarySubtotal">Rp0</strong>
+          </div>
+          <div>
+            <span>Metode</span>
+            <strong id="summaryPayment">Belum dipilih</strong>
+          </div>
+          <div class="summary-total">
+            <span>Total</span>
+            <strong id="summaryTotal">Rp0</strong>
+          </div>
+        </div>
+
+        <button class="btn btn-primary full" type="submit">Kirim Pesanan</button>
+      </form>
+
+      <div class="order-success" id="orderSuccess" hidden>
+        <span class="success-mark"></span>
+        <h3>Pesanan selesai.</h3>
+        <p id="successMessage"></p>
+
+        <div class="tracking-card" aria-label="Tracking pesanan">
+          <div class="tracking-head">
+            <span>Tracking Pesanan</span>
+            <strong id="trackingStatus">Dikemas</strong>
+          </div>
+          <div class="tracking-line">
+            <div class="tracking-step is-complete">
+              <span></span>
+              <strong>Pesanan diterima</strong>
+              <small>Checkout selesai</small>
+            </div>
+            <div class="tracking-step is-active" data-track-step="packed">
+              <span></span>
+              <strong>Dikemas</strong>
+              <small>Produk sedang disiapkan</small>
+            </div>
+            <div class="tracking-step" data-track-step="sent">
+              <span></span>
+              <strong>Diantar</strong>
+              <small>Kurir menuju alamatmu</small>
+            </div>
+          </div>
+          <button class="btn btn-secondary full" type="button" id="advanceTrackingButton">Update ke Diantar</button>
+        </div>
+
+        <div class="receipt-card" aria-label="Struk pembelian">
+          <div class="receipt-head">
+            <div>
+              <span>Struk AirGuard</span>
+              <strong id="receiptOrderId">AG-0000</strong>
+            </div>
+            <small id="receiptDate">-</small>
+          </div>
+          <div class="receipt-lines" id="receiptLines"></div>
+          <div class="receipt-total">
+            <span>Total Pembayaran</span>
+            <strong id="receiptTotal">Rp0</strong>
+          </div>
+          <div class="receipt-meta">
+            <div>
+              <span>Nama</span>
+              <strong id="receiptName">-</strong>
+            </div>
+            <div>
+              <span>Metode</span>
+              <strong id="receiptPayment">-</strong>
+            </div>
+            <div>
+              <span>Alamat</span>
+              <strong id="receiptAddress">-</strong>
+            </div>
+          </div>
+        </div>
+
+        <a class="btn btn-primary full whatsapp-link" id="whatsappSupport" href="https://wa.me/6282135366596" target="_blank" rel="noopener">
+          Hubungi CS WhatsApp
+        </a>
+        <p class="cs-note">CS: wa.me/082135366596</p>
+        <button class="btn btn-secondary full" type="button" data-close-order>Tutup</button>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>
